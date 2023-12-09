@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Location
+{% endblock %}
+
+{% block main %}
+
+    {% if session["user_id"] %}
+        
+        <div class="container mt-4">
+
+            <h2>Name: {{ location_data[2] }}</h2>
+
+            {% if location_data[3] is not none %}
+                <p>Description: {{ location_data[3] }}</p>
+            {% endif %}
+
+            {% if parameter_data %}
+                <h3>Date: {{ date }}</h3>
+
+                <table class="table table-striped mt-4">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Parameter Name</th>
+                            <th>Values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in parameter_data %}
+                            <tr>
+                                {% for j in i %}
+                                    <td>{{ j }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            {% endif %}
+
+            <div class="text-center mt-4">
+                <form action="/all_location_data" method="get">
+                    <button type="submit" class="btn btn-primary">View all data</button>
+                </form>
+                
+                <form action="/compare_between_data" method="get">
+                    <button type="submit" class="btn btn-success">Compare between data</button>
+                </form>
+                
+                {% if session["user_type"] == "R" %}
+                    <form action="/add_data" method="get">
+                        <button type="submit" class="btn btn-info">Add data</button>
+                    </form>
+                {% endif %}
+                
+                {% if location_data[1] == session["user_id"] %}
+                    <form action="/edit_location" method="post" class="mt-3">
+                        <input type="hidden" name="location_id" value="{{ location_data[0] }}">
+                        <button type="submit" class="btn btn-warning">Edit location</button>
+                    </form>
+                {% endif %}
+            </div>
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

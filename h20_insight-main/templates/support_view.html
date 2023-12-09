@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Support
+{% endblock %}
+
+{% block header %}
+    Support
+{% endblock %}
+
+{% block main %}
+
+    <div class="section" style="text-align: left;">
+
+        <h3>Status : Resolved</h3>
+        <h3>Subject : Lost access to my old email.</h3>
+        <h3>Ticket made in : 11-11-2022</h3>
+        <h3>Description : </h3>
+        <p> I no loger have access to the email I used to sign up into this page. This website dosent have a chnage email option. 
+            So I need help changing my email. Also it will be nice if you guys impliment a chnage email feature.
+        </p>
+
+        <div class="massange_admin">
+            <h4>Admin</h4>
+            <P>Hi, Give me your new email and I will chnage it.
+                And our devs are hard at work making a chnage email option.
+                Thx for your feedback.
+            </P>
+        </div>
+
+        <div class="massange_user">
+            <h4>User</h4>
+            <P> Email : userNew@gmail.com.
+                Thx for your time.
+            </P>
+        </div>
+
+        <!--Dont show the buttion if the problem is resolved : TODO-->
+        <form action="" class="section">
+            <input type="text" autofocus autocomplete="off" style="width: 80%;">
+            <button type="submit">Send</button>
+        </form>
+
+    </div>
+
+{% endblock %}

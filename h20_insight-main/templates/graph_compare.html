@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Comparison Graph</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body class="container mt-4">
+
+    <h1 class="text-center mb-4">Comparing Data of Same Location </h1>
+
+    <!-- Row for all charts -->
+    <div class="row">
+
+        <!-- pH Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">pH Comparison</h2>
+                    <canvas id="phChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Temperature Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Temperature Comparison</h2>
+                    <canvas id="tempChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Second Row for additional charts -->
+    <div class="row mt-4">
+
+        <!-- BOD Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">BOD Comparison</h2>
+                    <canvas id="bodChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- COD Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">COD Comparison</h2>
+                    <canvas id="codChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Third Row for additional charts -->
+    <div class="row mt-4">
+
+        <!-- Calcium Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Calcium Comparison(mg/l)</h2>
+                    <canvas id="calciumChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coliform Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Coliform Comparison(N/100ml)</h2>
+                    <canvas id="coliformChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <!-- Hardness Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Hardness Comparison(mg/l)</h2>
+                    <canvas id="hardnessChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Lead Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Lead Comparison(mg/l)</h2>
+                    <canvas id="leadChart" width="400" height="200"></canvas>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+        <!-- Nitrogen Comparison Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Nitrogen Comparison(mg/l)</h2>
+                    <canvas id="nitrogenChart" width="400" height="200"></canvas>
+                </div>
+                </div>
+            </div>
+       <!-- Sodium Comparison Section -->
+       <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Sodium Comparison(mg/l)</h2>
+                <canvas id="sodiumChart" width="400" height="200"></canvas>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+       <!-- TSS Comparison Section -->
+       <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">TSS Comparison(mg/l)</h2>
+                <canvas id="tssChart" width="400" height="200"></canvas>
+            </div>
+            </div>
+        </div>
+       <!-- Turbidity Comparison Section -->
+       <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Turbidity Comparison(mg/l)</h2>
+                <canvas id="turbidityChart" width="400" height="200"></canvas>
+            </div>
+            </div>
+        </div>
+    </div>
+        <!-- Add more cards for other comparisons -->
+
+    </div>
+
+    <script>
+        // Sample data for two locations
+        var location1Data = {{ location_1_data | tojson | safe }};
+
+        var location2Data = {{ location_2_data | tojson | safe }};
+
+        var date = {{ date_dic | tojson | safe }}
+
+        function createBarChart(canvasId, label, data1, data2) {
+        var ctx = document.getElementById(canvasId).getContext('2d');
+        return new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [date.left, date.right],
+                datasets: [{
+                    label: label,
+                    backgroundColor: ['rgba(75, 192, 192, 0.7)', 'rgba(255, 99, 132, 0.7)'],
+                    data: [data1, data2]
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Set to false to hide the legend
+                    }
+                }
+            }
+        });
+    }
+
+        // Generate charts for each comparison
+        createBarChart('phChart', 'pH', location1Data.ph, location2Data.ph);
+        createBarChart('tempChart', 'Temperature', location1Data.temp, location2Data.temp);
+        createBarChart('bodChart', 'BOD', location1Data.bod, location2Data.bod);
+        createBarChart('codChart', 'COD', location1Data.cod, location2Data.cod);
+        createBarChart('calciumChart', 'Calcium', location1Data.calcium, location2Data.calcium);
+        createBarChart('coliformChart', 'Coliform', location1Data.coliform, location2Data.coliform);
+        createBarChart('hardnessChart', 'Hardness', location1Data.hardness, location2Data.hardness);
+        createBarChart('leadChart', 'Lead', location1Data.lead, location2Data.lead);
+        createBarChart('nitrogenChart', 'Lead', location1Data.nitrogen, location2Data.nitrogen);
+        createBarChart('sodiumChart', 'Lead', location1Data.sodium, location2Data.sodium);
+        createBarChart('tssChart', 'Lead', location1Data.tss, location2Data.tss);
+        createBarChart('turbidityChart', 'Lead', location1Data.turbidity, location2Data.turbidity);
+        // Add more charts for other comparisons
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block header %}
+    H₂O Insight
+{% endblock %}
+
+{% block main %}
+
+    <form action="/login" method="post" class="section">
+
+        <div  class="section">
+            <input autocomplete="off" autofocus name="identification" placeholder="Username or Email" type="text">
+        </div>
+
+        <div  class="section">
+            <input name="password" placeholder="Password" type="password">
+        </div>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <p class="section">Don't have an account?</p>
+    <form action="/register", method="get" class="section">
+        <button type="submit">Register</button>
+    </form>
+
+{% endblock %}

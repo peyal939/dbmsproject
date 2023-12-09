@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Location
+{% endblock %}
+
+{% block main %}
+
+        <h2>Name : {{ location_data[2] }}</h2>
+        {% if location_data[3]  is not none %}
+            <p>Description: {{ location_data[3] }}</P>
+        {% endif %}
+
+        <table>
+                
+            <tr>
+              <th id="parameter">Parameter Name</th>
+              <th id="date">{{ date[0] }}</th>
+              <th id="date">{{ date[1] }}</th>
+            </tr>  
+            
+            {% for tuple in parameter_data %}
+
+                <tr>
+
+                    {% for data in tuple %}
+                        <td> {{ data }} </td>
+                    {% endfor %}
+                    
+                </tr>
+
+            {% endfor %}
+             
+
+        </table>
+
+{% endblock %}

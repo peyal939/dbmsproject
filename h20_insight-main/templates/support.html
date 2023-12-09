@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Support
+{% endblock %}
+
+{% block header %}
+    Support
+{% endblock %}
+
+{% block main %}
+    <!--Sample data for forentend submittion-->
+    <div class="section">
+        <table>
+            
+            <tr>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Date Submitted</th>
+                <th>Resolved</th>
+            </tr>
+
+            <tr>
+                <th>121</th>
+                <th>Index page not working.</th>
+                <th>31-11-2022</th>
+                <th><b>No</b></th>
+            </tr>
+
+            <tr>
+                <th>221</th>
+                <th>Lost access to my old email.</th>
+                <th>11-11-2022</th>
+                <th><b>Yes</b></th>
+            </tr>
+
+            <tr>
+                <th>12</th>
+                <th>Location has wrong gps data.</th>
+                <th>11-11-2021</th>
+                <th><b>Yes</b></th>
+            </tr>
+
+        </table>
+    </div>
+
+    <form action="/support_form" class="section">
+        <button type="submit">Submit a new ticket</button>
+    </form>
+
+{% endblock %}                                  

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+    {% if session["user_id"] %}
+
+        <div class="container mt-4">
+
+            <form action="" method="POST" class="section">
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control" placeholder="Location Name" required="true" name="q">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+            
+            {% if (session["user_type"] == "A") or (session["user_type"] == "R") %}
+                <form action="/add_location" class="section">
+                    <button type="submit" class="btn btn-success">Add Location</button>
+                </form>
+            {% endif %}
+
+            <form action="/support" class="section">
+                <button type="submit" class="btn btn-info">Support</button>
+            </form>
+
+            <form action="/logout" class="section">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}
